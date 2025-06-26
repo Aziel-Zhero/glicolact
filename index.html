@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Glicose e Lactose</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="./public/favicon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <header class="text-center mt-6" role="banner">
+    <img src="./public/logo.png" alt="Logo Unimed" class="max-w-xs mx-auto" />
+  </header>
+
+  <main class="flex-grow text-center mt-6 px-4" role="main" aria-label="Conteúdo principal">
+
+    <h1 class="text-3xl md:text-4xl font-semibold text-gray-800 title">Dosagem de Glicose e Lactose Infantil</h1>
+
+    <section class="mt-10 px-6 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" aria-label="Seleção de exames">
+
+      <!-- Card Glicose -->
+      <article
+        tabindex="0"
+        aria-describedby="desc-glicose"
+        class="bg-white p-8 rounded-lg shadow-md cursor-pointer transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-green-500 min-w-[280px]"
+        onclick="location.href='./src/app/glicose.html'"
+        onkeydown="if(event.key==='Enter' || event.key===' ') location.href='./src/app/glicose.html'"
+      >
+        <img src="./public/GlucUp.png" alt="Imagem representando Glicose" class="mx-auto mb-6 max-w-[200px]" />
+        <p id="desc-glicose" class="sr-only">Link para página de dosagem de glicose infantil</p>
+        <button
+          type="button"
+          aria-label="Ir para dosagem de glicose infantil"
+          class="inline-flex items-center px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+          onclick="location.href='./src/app/glicose.html'"
+        >
+          Glicose
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 stroke-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 3v5a1 1 0 001 1h3l3 7v2H6a2 2 0 01-2-2V3zM14 7h6M14 11h6M14 15h6M14 19h6" />
+          </svg>
+        </button>
+      </article>
+
+      <!-- Card Lactose -->
+      <article
+        tabindex="0"
+        aria-describedby="desc-lactose"
+        class="bg-white p-8 rounded-lg shadow-md cursor-pointer transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-green-500 min-w-[280px]"
+        onclick="location.href='./src/app/lactose.html'"
+        onkeydown="if(event.key==='Enter' || event.key===' ') location.href='./src/app/lactose.html'"
+      >
+        <img src="./public/Lactol.png" alt="Imagem representando Lactose" class="mx-auto mb-6 max-w-[270px]" />
+        <p id="desc-lactose" class="sr-only">Link para página de dosagem de lactose infantil</p>
+        <button
+          type="button"
+          aria-label="Ir para dosagem de lactose infantil"
+          class="inline-flex items-center px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+          onclick="location.href='./src/app/lactose.html'"
+        >
+          Lactose
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 stroke-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7v10a2 2 0 01-1 1.73l-6 3.5a2 2 0 01-2 0l-6-3.5A2 2 0 014 17V7a2 2 0 011-1.73l6-3.5a2 2 0 012 0l6 3.5A2 2 0 0120 7z" />
+          </svg>
+        </button>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="text-center mt-10 py-10 bg-gray-200" role="contentinfo">
+   <p class="text-gray-600 text-base font-medium">
+  Desenvolvido por Aziel com muito carinho para Equipe da Coleta 
+  <span class="heart">💚</span> Unimed
+</p>
+
+  </footer>
+
+  <style>
+  @keyframes pulse-heart {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+  }
+
+  .heart {
+    display: inline-block;
+    animation: pulse-heart 1.5s ease-in-out infinite;
+  }
+</style>
+
+
+  <script>
+    gsap.from(".title", {
+      opacity: 0,
+      y: -40,
+      duration: 1,
+      ease: "power3.out"
+    });
+  </script>
+</body>
+</html>
