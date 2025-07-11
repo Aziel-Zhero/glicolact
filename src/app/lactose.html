@@ -2,10 +2,11 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Dosador de Lactose Infantil</title>
+  <title>Glico & Lact | Lactose</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/png" sizes="192x192" href="../.././public/favicon.png" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="icon" href="../.././public/favicon.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
@@ -22,29 +23,22 @@
 </head>
 <body class="bg-green-50 min-h-screen flex flex-col">
 
-  <!-- Header com logo e título -->
   <header class="text-center mt-6 px-4">
-    <!-- Botão Voltar -->
     <a href="../../index.html" class="absolute top-4 left-4 text-green-700 hover:text-green-900 text-xl flex items-center gap-2" title="Voltar">
       <i class="fas fa-arrow-left"></i>
     </a>
-
-    <img src="../../public/logo.png" alt="Logo Unimed" class="mx-auto w-32 mb-4" />
+   <img src="../../public/GL.png" alt="Logo Unimed" class="mx-auto  mb-4 h-20" />
     <h1 class="text-3xl md:text-4xl font-bold text-green-800">Dosador de Lactose Infantil</h1>
   </header>
 
-  <!-- Conteúdo principal -->
   <main class="flex-grow flex flex-col items-center px-4 py-6">
     <div class="relative w-full max-w-xl bg-white p-6 rounded-lg shadow-lg">
-
-      <!-- Botão de Ajuda -->
       <button id="help-btn" class="absolute top-4 right-4 text-green-700 hover:text-green-900 text-2xl" title="Ajuda">
         <i class="fas fa-circle-question"></i>
       </button>
 
       <img src="../../public/Lactol.png" alt="Lactose" class="w-72 mt-6 mx-auto" />
 
-      <!-- Campo de entrada -->
       <label for="weight" class="block mb-2 font-semibold text-gray-700">Peso do paciente (kg):</label>
       <input
         id="weight"
@@ -52,6 +46,7 @@
         class="w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-green-500"
         placeholder="Ex: 10.2"
       />
+      <span id="error-msg" class="hidden text-red-600 text-sm mt-1">Por favor, insira um peso válido maior que 0kg.</span>
       <button
         id="calculate-btn"
         class="w-full mt-4 bg-green-500 text-white py-3 rounded-md hover:bg-green-600 transition focus:ring-2 focus:ring-green-500"
@@ -61,86 +56,56 @@
     </div>
   </main>
 
-  <!-- Modal Resultado -->
   <div id="result-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-xl w-11/12 max-w-lg text-center relative">
       <button id="close-btn" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
       <h2 class="text-xl font-bold text-green-700 mb-4">Resultado</h2>
       <p id="difference" class="text-gray-800 mb-2"></p>
-      <p id="dosage" class="text-green-900 font-semibold text-lg"></p>
+      <p id="dosage" class="font-semibold text-lg"></p>
     </div>
   </div>
 
-  <!-- Modal Ajuda -->
   <div id="help-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-xl w-11/12 max-w-lg relative">
-      <button id="close-help" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
-      <h2 class="text-xl font-bold text-green-700 mb-4">Como funciona?</h2>
-      <p class="text-gray-700 leading-relaxed">
-        Informe o <strong>peso</strong> do paciente e clique em <strong>Calcular Dosagem</strong>.<br />
-        A dosagem é feita da seguinte forma:<br />
-        <code class="bg-gray-100 px-2 py-1 rounded">dosagem = peso (kg) × 0.8 ml</code><br />
-        Consulte o protocolo Unimed antes de aplicar.
-      </p>
-    </div>
+  <button id="close-help" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+  <h2 class="text-xl font-bold text-green-700 mb-4">Como funciona?</h2>
+
+  <p class="text-gray-700 leading-relaxed mb-4">
+    Informe o <strong>peso</strong> do paciente no campo <strong>Peso do paciente (kg)</strong> e clique em <strong>Calcular Dosagem</strong>.
+  </p>
+
+  <p class="text-gray-700 leading-relaxed mb-4">
+    O dosador calcula automaticamente a quantidade recomendada de lactose com base no peso informado, de acordo com o protocolo Unimed.
+  </p>
+
+  <p class="text-gray-700 leading-relaxed">
+    <strong>A fórmula aplicada é:</strong><br />
+    <code class="bg-gray-100 px-2 py-1 rounded text-green-800 font-mono">
+      Se peso &lt;= 24kg → Dosagem = peso × 12ml<br />
+      Se peso &gt; 24kg → Dosagem = 300ml (dose padrão)
+    </code>
+  </p>
+
+  <p class="text-gray-700 mt-4 font-semibold">
+    <em>Consulte sempre o POP ou seu Coordenador de Enfermagem antes de aplicar.</em>
+  </p>
+</div>
+
   </div>
 
-  <!-- Rodapé -->
   <footer class="text-center py-6 bg-gray-200">
     <p class="text-gray-600 text-base font-medium">
-      Desenvolvido por Aziel com muito carinho para Equipe da Coleta <span class="heart">💚</span> Unimed
+      Desenvolvido por Aziel e Fabrício com muito carinho para Equipe da Coleta <span class="heart">💚</span> Unimed
     </p>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Animações -->
   <script>
-    gsap.from("h1", { opacity:0, y:-20, duration:1 });
-    gsap.from("input", { opacity:0, y:20, duration:1, delay:0.5 });
-
-    const weight = document.getElementById("weight");
-    const btn = document.getElementById("calculate-btn");
-    const popup = document.getElementById("result-popup");
-    const diff = document.getElementById("difference");
-    const dose = document.getElementById("dosage");
-    const closeBtn = document.getElementById("close-btn");
-
-    const helpBtn = document.getElementById("help-btn");
-    const helpPopup = document.getElementById("help-popup");
-    const closeHelp = document.getElementById("close-help");
-
-    btn.addEventListener("click", () => {
-      const v = parseFloat(weight.value);
-      if (!v || v <= 0) return alert("Insira um peso válido > 0kg");
-
-      diff.textContent = `Peso recebido: ${v.toFixed(2)} kg`;
-      dose.textContent = `Dosagem calculada: ${(v * 0.8).toFixed(2)} ml`;
-
-      popup.classList.remove("hidden");
-      gsap.fromTo(popup.querySelector("div"),
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
-      );
-    });
-
-    closeBtn.addEventListener("click", () => {
-      gsap.to(popup.querySelector("div"), {
-        opacity:0, scale:0.8, duration:0.3, onComplete:() => popup.classList.add("hidden")
-      });
-    });
-
-    helpBtn.addEventListener("click", () => {
-      helpPopup.classList.remove("hidden");
-      gsap.fromTo(helpPopup.querySelector("div"),
-        { opacity:0, scale:0.8 },
-        { opacity:1, scale:1, duration:0.4, ease:"back.out(1.7)" }
-      );
-    });
-
-    closeHelp.addEventListener("click", () => {
-      gsap.to(helpPopup.querySelector("div"), {
-        opacity:0, scale:0.8, duration:0.3, onComplete:() => helpPopup.classList.add("hidden")
-      });
-    });
+    gsap.from("h1", { opacity: 0, y: -20, duration: 1 });
+    gsap.from("input", { opacity: 0, y: 20, duration: 1, delay: 0.5 });
   </script>
+
+  <!-- Lógica principal -->
+  <script src="../../js/script_lactose.js"></script>
 </body>
 </html>
